@@ -83,20 +83,20 @@ def txt_translate(name):
         exit(-1)
 
     text = file.read()
+    file.close()
     length = len(text)
 
     if length == 0:
         print("No text in file")
         exit(-1)
 
-    word_list = text.split(" ")
-
-    file.close()
+    
     if length < 5000:
         sp_text = GoogleTranslator(source="en", target="es").translate(text)
         with open("spanish " + name, "w") as file:
             file.write(sp_text)
     else:
+        word_list = text.split(" ")
         t_list = over_five_thousand(word_list)
         with open("spanish " + name, "w") as file:
             file.write("\n".join(t_list))
