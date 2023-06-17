@@ -25,7 +25,9 @@ def over_five_thousand(word_list):
 
         else:
             # Translate 5000 character block of text and add to list
-            t_list.append(GoogleTranslator(source="en", target="es").translate(words))
+            t_list.append(
+                GoogleTranslator(source="en", target="es").translate(words)
+            )
             j = 0  # Reset character counter
             words = word + " "
 
@@ -86,12 +88,12 @@ def txt_translate(name):
     if length == 0:
         print("No text in file")
         exit(-1)
-    line = file.readlines()
+
     word_list = text.split(" ")
 
     file.close()
     if length < 5000:
-        sp_text = GoogleTranslator(source="en", target="es").translate("\n".join(line))
+        sp_text = GoogleTranslator(source="en", target="es").translate(text)
         with open("spanish " + name, "w") as file:
             file.write(sp_text)
     else:
