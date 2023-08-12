@@ -45,7 +45,7 @@ def docx_translate(name):
     try:
         text = docx2txt.process(name)
     except FileNotFoundError:
-        print("File Not Found")
+        print("File Not Found", file=sys.stderr)
         exit(-1)
 
     length = len(text)
@@ -79,7 +79,7 @@ def txt_translate(name):
     try:
         file = open(name, "r")
     except FileNotFoundError:
-        print("File not found")
+        print("File not found", file=sys.stderr)
         exit(-1)
 
     text = file.read()
@@ -87,7 +87,7 @@ def txt_translate(name):
     length = len(text)
 
     if length == 0:
-        print("No text in file")
+        print("No text in file", file=sys.stderr)
         exit(-1)
 
     
@@ -105,12 +105,12 @@ def txt_translate(name):
 try:  # Check command for a valid file
     name = sys.argv[1]
 except IndexError:
-    print("Error!: Must enter a file")
-    print("Example: etos file or etos /path/to/file")
+    print("Error!: Must enter a file", file=sys.stderr)
+    print("Example: etos file or etos /path/to/file", file=sys.stderr)
     exit()
 
 if name == "help" or name == "--help":  # Return syntax if user types help
-    print("Example: etos file or etos /path/to/file")
+    print("Example: etos file or etos /path/to/file", file=sys.stderr)
     exit()
 
 if name[-5:] == ".docx":
@@ -120,4 +120,4 @@ elif name[-4:] == ".txt":
     txt_translate(name)
 
 else:
-    print("Unable to translate this filetype")
+    print("Unable to translate this filetype", file=sys.stderr)
